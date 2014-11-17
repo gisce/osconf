@@ -16,6 +16,9 @@ class Service(object):
   
 config = config_from_environment('SERVICE', ['param1'])
 
+# Environ variables must be defined with 'SERVICE' prefix and the key
+# export SERVICE_PARAM1='Hi'
+
 service = Service(**config)
 
 # You can pass default values to config_from_environment
