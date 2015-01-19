@@ -19,7 +19,7 @@ def config_from_environment(env_prefix, env_required=None, **kwargs):
             config[key] = env_eval(value)
     if env_required:
         for required in env_required:
-            if required not in config:
+            if required not in config or config[required] == '':
                 raise RequiredException(
                     'You must pass %s or define env var %s%s' % (
                         required, prefix, required.upper())
