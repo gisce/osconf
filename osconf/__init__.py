@@ -13,10 +13,13 @@ def config_from_environment(env_prefix, env_required=None, **kwargs):
     config = kwargs.copy()
     prefix = '%s_' % env_prefix.upper()
     for env_key, value in os.environ.items():
+        value = env_eval(value)
+        if value == '':
+            continue
         env_key = env_key.upper()
         if env_key.startswith(prefix):
             key = env_key[len(prefix):].lower()
-            config[key] = env_eval(value)
+            config[key] = value
     if env_required:
         for required in env_required:
             if required not in config or config[required] == '':
